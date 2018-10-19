@@ -1,0 +1,86 @@
+ 
+  PLEASE READ: don't email me to report bugs, unless you are sure it's a packaging bug. Not only is email not a good tool for tracking bugs, it also excludes anybody else from tracking or working on the issue. Please read the section "Debugging and reporting problems" below.
+
+=============
+
+Supported architectures: amd64, arm64, i386
+
+Supported Ubuntu versions:
+- 16.04 (xenial) <- obsolete
+- 18.04 (bionic) <- *suggested version*
+- 18.10 (cosmic) <- experimental
+
+For forum support see: http://goo.gl/qoUpWK
+
+=== Introduction ===
+This PPA provides updated X (2D) and mesa (3D) free graphics drivers for radeon, intel and nvidia hardware. Updates packages provide:
+ * all packages are automatically built twice a day, when there are upstream changes
+ * Vulkan 1.1+ on recent intel and radeon GPU (install with sudo apt install mesa-vulkan-drivers )
+ * OpenGL 4.5+ support and new OpenGL extensions: http://mesamatrix.net
+ * OpenCL support with updated libclc
+ * gallium-nine support. Read the specific section below
+ * VDPAU and VAAPI Gallium3D accelerated video drivers (see below)
+ * OpenMAX IL Bellagio and XvMC *only* on zesty and older - disabled since artful due to not being broadly used
+ * packages built against latest LLVM
+ * Disabled Ubuntu MIR
+
+For more details check the changelogs.
+
+=== Basic usage ===
+See "Adding this PPA to your system" later on, or just do:
+sudo add-apt-repository ppa:oibaf/graphics-drivers
+and update your Ubuntu with the package here.
+
+=== Using gallium-nine ===
+Gallium-nine lets you run DirectX 9 games in a faster way, avoiding the inefficient translation of D3D9 calls to OpenGL. For more info see https://wiki.ixit.cz/d3d9
+You need:
+ * enable this PPA (see previous paragraph)
+ * install libd3dadapter9-mesa package from this PPA
+ * wine from this PPA: https://launchpad.net/~commendsarnex/+archive/ubuntu/winedri3
+ * then to enable gallium-nine run winecfg and enable native DirectX 9 under Graphics tab
+
+=== Using accelerated video ===
+Supported VDPAU drivers: r300, r600, radeonsi, nouveau
+Supported VAAPI drivers: r600, radeonsi
+Only on zesty and older: supported OpenMAX drivers: r600, radeonsi
+Only on zesty and older: supported XvMC drivers: r600, nouveau
+
+* First you need to install mesa-vdpau-drivers package:
+sudo apt-get install mesa-vdpau-drivers
+
+* Then to test the VDPAU driver with mpv use:
+$ mpv --hwdec=vdpau yourvideofile
+
+* To test the XvMC (e.g.) r600 driver edit the file /etc/X11/XvMCConfig and insert:
+/usr/lib/x86_64-linux-gnu/dri/libXvMCr600.so
+or, if you are on 32 bit:
+/usr/lib/i386-linux-gnu/dri/libXvMCr600.so
+
+and restart the X server. Then to test it with mplayer:
+mplayer -vo xvmc yourvideofile
+
+=== Using alternative drivers ===
+To run your OpenGL program (in this case glxgears -info) with non default drivers:
+* gallium llvmpipe software render:
+$ LIBGL_ALWAYS_SOFTWARE=1 glxgears -info
+
+=== Debugging and reporting problems ===
+If you have some problem with the drivers try running the application from the command line and see if there are graphics related warnings. Also type dmesg to see if there are other related informations here.
+
+If you get crashes install the relevant -dbg pacakges (libgl1-mesa-dri-dbg or libgl1-mesa-dri-experimental-dbg for 3D drivers and xserver-xorg-video-intel-dbg , xserver-xorg-video-nouveau-dbg or xserver-xorg-video-radeon-dbg for X drivers) and reproduce the crash with gdb. Example:
+$ gdb glxgears
+[...make your application crash and then get a backtrace with:]
+(gdb) bt
+
+If X.org crashes look at /var/log/Xorg.0.log (or /var/log/Xorg.0.log.old when a new X session is started after the crash).
+
+With the gathered informations try searching at https://bugs.freedesktop.org/query.cgi (also try with google) if someone already reported a similar bug. If not you may want to report a new bug:
+for 3D drivers bugs: https://bugs.freedesktop.org/enter_bug.cgi?product=Mesa
+for X / 2D driver bugs: https://bugs.freedesktop.org/enter_bug.cgi?product=xorg
+
+=== Revert to original drivers ===
+To revert to standard Ubuntu drivers type the following in a prompt shell:
+$ sudo apt-get install ppa-purge
+$ sudo ppa-purge ppa:oibaf/graphics-drivers
+ More info: https://launchpad.net/~oibaf/+archive/ubuntu/graphics-drivers
+Press [ENTER] to continue or Ctrl-c to cancel adding it.

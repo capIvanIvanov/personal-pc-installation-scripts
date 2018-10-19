@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sudo apt-get -y install samba
-sudo apt-get -y install git
+sudo apt-get -y install git gitk
 
 echo "Enter the Samba Password."
 sudo smbpasswd ivan

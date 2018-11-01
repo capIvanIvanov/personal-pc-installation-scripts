@@ -3,6 +3,9 @@
 sudo apt-get -y install samba
 sudo apt-get -y install git gitk
 
+git config --global user.name "Ivan Ivanov (Main PC)"
+git config --global user.email "ivan.ivanov.cigsso@gmail.com"
+
 echo "Enter the Samba Password."
 sudo smbpasswd -a ivan
 

@@ -4,7 +4,7 @@ sudo apt-get -y install samba
 sudo apt-get -y install git gitk
 
 echo "Enter the Samba Password."
-sudo smbpasswd ivan
+sudo smbpasswd -a ivan
 
 sudo su -c "echo '[Documents]' >> /etc/samba/smb.conf"
 sudo su -c "echo '	comment    = Documents of Fractal-Design-PC'    >> /etc/samba/smb.conf"

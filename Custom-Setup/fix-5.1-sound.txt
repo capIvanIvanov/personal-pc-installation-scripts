@@ -1,0 +1,10 @@
+
+1. Активиране на 5.1 Изходите:
+	- Десен бутон върху иконата за звука -> Audoi Volume Settings ...
+	- В покацалият се диалог избираме Audio Volume;
+	- В таб Devices се уверяваме че "SB X-Fi Surround 5.1" е otuput устройството по подразбиране;
+	- И се уверяваме че "LifeCam Cinema" е input устройстото по подразбиране;
+	- В Таб Advanced избираме за всички устойства профил "Off", само за "SB X-Fi Surround 5.1" избираме "Analog Surround 5.1 Output" и за "LifeCam Cinema" избираме "Analog Mono Input"
+	- OK
+
+2. Само това е достатъчно.

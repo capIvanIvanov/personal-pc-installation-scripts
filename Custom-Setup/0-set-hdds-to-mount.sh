@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir /home/ivan/Virtual-Machines
-mkdir /home/ivan/Virtual-Machines-2
+#mkdir /home/ivan/Virtual-Machines-2
 mkdir /home/ivan/Storage
 mkdir /home/ivan/Install-Sets
 mkdir /home/ivan/Movies

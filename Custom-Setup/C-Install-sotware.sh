@@ -27,8 +27,8 @@ read -n1 -rsp "Preass <c> to install AnyDesk or <any other key> to skip" result
 if [ $result = 'c' ]; then
 	printf "\nInstalling...\n"
 	cd ~/Downloads
-	wget https://download.anydesk.com/linux/anydesk_4.0.0-1_amd64.deb
-	sudo qapt-deb-installer anydesk_4.0.0-1_amd64.deb
+	wget https://download.anydesk.com/linux/anydesk_4.0.1-1_amd64.deb
+	sudo qapt-deb-installer anydesk_4.0.1-1_amd64.deb
 else
 	printf "\nSkipped.\n"
 fi

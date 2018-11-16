@@ -57,3 +57,5 @@ if [ $result = 'c' ]; then
 else
 	printf "\nSkipped.\n"
 fi
+
+sudo apt-get -y remove kwalletmanager

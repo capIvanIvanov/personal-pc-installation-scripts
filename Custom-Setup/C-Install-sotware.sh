@@ -2,7 +2,7 @@
 
 read -n1 -rsp "Preass <c> to start the script or <any other key> to quit and check for newer version of AnyDesk" result
 
-if [ $result = 'c' ]; then
+if [[ $result == 'c' ]]; then
 	printf "\nContunuing...\n"
 else
 	printf "\nExiting...\n"
@@ -11,7 +11,7 @@ fi
 
 read -n1 -rsp "Preass <c> to install VMware Player or <any other key> to skip" result
 
-if [ $result = 'c' ]; then
+if [[ $result == 'c' ]]; then
 	printf "\nInstalling...\n"
 	sudo apt-get -y install gcc-8 g++-8
 	cd ~/Downloads
@@ -24,7 +24,7 @@ fi
 
 read -n1 -rsp "Preass <c> to install AnyDesk or <any other key> to skip" result
 
-if [ $result = 'c' ]; then
+if [[ $result == 'c' ]]; then
 	printf "\nInstalling...\n"
 	cd ~/Downloads
 	wget https://download.anydesk.com/linux/anydesk_4.0.1-1_amd64.deb
@@ -35,7 +35,7 @@ fi
 
 read -n1 -rsp "Preass <c> to install Viber or <any other key> to skip" result
 
-if [ $result = 'c' ]; then
+if [[ $result == 'c' ]]; then
 	printf "\nInstalling...\n"
 	cd ~/Downloads
 	wget -O ./viber.deb http://download.cdn.viber.com/cdn/desktop/Linux/viber.deb
@@ -50,7 +50,7 @@ fi
 
 read -n1 -rsp "Preass <c> to install foobar2000 or <any other key> to skip" result
 
-if [ $result = 'c' ]; then
+if [[ $result == 'c' ]]; then
 	printf "\nInstalling...\n"
 	cd ~/Install-Sets/Programs/foobar2000
 	wine foobar2000_v1.4.exe
@@ -58,4 +58,4 @@ else
 	printf "\nSkipped.\n"
 fi
 
-sudo apt-get -y remove kwalletmanager
+#sudo apt -y remove kwalletmanager
